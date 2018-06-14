@@ -1,0 +1,22 @@
+﻿<h1>All Cars</h1>
+<table class="table table-bordered">
+    
+    <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Color</th>
+    </tr>
+    @for (int i = 0; i < ViewBag.Cars.Count; i++)
+    {
+        var Car = ViewBag.Cars[i];
+
+    <tr>
+        <td>@Car["Model"]</td>
+        <td>@Car["Make"]</td>
+        <td>@Car["Year"]</td>
+        <td>@Car["Color"]</td>
+    </tr>
+    }
+
+</table>

@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+Search by Make, Model, Color or Year:
+<input type="text" id="input" class="form-control"
+       oninput="search()" />
+
+<table class="table table-striped" id="cars"></table>
+
+<script>
+    function search() {
+        $.ajax(
+            {
+                type: 'POST',
+                url: '/Home/SearchAPI',
+                data: '{id: "' + document.getElementById("input").value
+                    + '"}',
+                contentType: 'application/json; charset-utf-8',
+                dataType: 'json',
+                success:
+                    function (response) {
+                        var tableHTML = "<tr><th>Car ID</th>"
+                            + "<th>Make</th>"
+                            + "<th>Model</th>"
+                            + "<th>Year</th>"
+                            +"<th>Color</th></tr > ";
+                        for (var i = 0; i < response.length; i++) {
+                            var Car = response[i];
+                            var tr = "<tr><td>" + Car.CarID + "</td>"
+                                + "<td>" + Car["Make"] + "</td>"
+                                + "<td>" + Car["Model"] + "</td>"
+                                + "<td>" + Car["Year"] + "</td>"
+                                + "<td>" + Car["Color"]+ "</td>"
+                                + "</tr>";
+                            tableHTML += tr;
+                        }
+                        document.getElementById("cars")
+                            .innerHTML = tableHTML;
+                    },
+                failure: function (response) {
+                    alert("Failure" + response.responseText);
+                },
+                error: function (response) {
+                    document.write("Error" + response.responseText);
+                }
+            }
+
+        );
+    }
+</script>
+
