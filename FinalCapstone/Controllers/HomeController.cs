@@ -98,11 +98,22 @@ namespace FinalCapstone.Controllers
             }
             StreamReader reader = new StreamReader(Response.GetResponseStream());
             string CarData = reader.ReadToEnd();
-            
+            CarClass[] CarList;
             try
             {
+
                  JsonData = JArray.Parse(CarData);
                 ViewBag.Cars = JsonData;
+                  CarList= new CarClass[JsonData.Count];
+                for (int i = 0; i <CarList.Length; i++)
+                {
+                    CarList[i] = new CarClass();
+                    CarList[i].make = (string)JsonData[i]["Make"];
+                    CarList[i].model = (string)JsonData[i]["Model"];
+                    CarList[i].year = (int)JsonData[i]["Year"];
+                    CarList[i].color = (string)JsonData[i]["Color"];
+                    ViewBag.Cars = CarList;
+                }
 
             }
             catch (Exception e)
@@ -112,7 +123,7 @@ namespace FinalCapstone.Controllers
                 return View("Error");
             }
 
-            return Json(JsonData);
+            return Json(CarList);
 
 
         }

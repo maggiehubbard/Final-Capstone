@@ -16,25 +16,25 @@ Search by Make, Model, Color or Year:
         $.ajax(
             {
                 type: 'POST',
-                url: '/Home/SearchAPI',
+                url: '/Home/SearchAPI?id=',
                 data: '{id: "' + document.getElementById("input").value
                     + '"}',
                 contentType: 'application/json; charset-utf-8',
                 dataType: 'json',
                 success:
                     function (response) {
-                        var tableHTML = "<tr><th>Car ID</th>"
-                            + "<th>Make</th>"
+                        var tableHTML = 
+                             "<th>Make</th>"
                             + "<th>Model</th>"
                             + "<th>Year</th>"
                             +"<th>Color</th></tr > ";
                         for (var i = 0; i < response.length; i++) {
                             var Car = response[i];
-                            var tr = "<tr><td>" + Car.CarID + "</td>"
-                                + "<td>" + Car["Make"] + "</td>"
-                                + "<td>" + Car["Model"] + "</td>"
-                                + "<td>" + Car["Year"] + "</td>"
-                                + "<td>" + Car["Color"]+ "</td>"
+                            var tr = 
+                                + "<td>" + Car.make + "</td>"
+                                + "<td>" + Car.model + "</td>"
+                                + "<td>" + Car.year + "</td>"
+                                + "<td>" + Car.color + "</td>"
                                 + "</tr>";
                             tableHTML += tr;
                         }
