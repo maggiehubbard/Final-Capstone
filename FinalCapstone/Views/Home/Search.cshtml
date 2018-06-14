@@ -12,6 +12,10 @@ Search by Make, Model, Color or Year:
 <table class="table table-striped" id="cars"></table>
 
 <script>
+    if (document.getElementById("input").value === null) {
+        document.getElementById("cars")
+            .innerHTML = "error";
+    }
     function search() {
         $.ajax(
             {
@@ -31,7 +35,7 @@ Search by Make, Model, Color or Year:
                         for (var i = 0; i < response.length; i++) {
                             var Car = response[i];
                             var tr = 
-                                + "<td>" + Car.make + "</td>"
+                                "<td>" + Car.make + "</td>"
                                 + "<td>" + Car.model + "</td>"
                                 + "<td>" + Car.year + "</td>"
                                 + "<td>" + Car.color + "</td>"

@@ -71,7 +71,7 @@ namespace FinalCapstone.Controllers
             return View();
         }
 
-        
+       
         public ActionResult SearchAPI(string id)
         {
             JArray JsonData;
